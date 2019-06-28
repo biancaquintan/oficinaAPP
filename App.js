@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   FlatList
 } from 'react-native';
 
@@ -37,6 +38,16 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}>Oficina APP</Text>
+        <ScrollView>
+          <FlatList data={this.state.orcamentos}
+                    renderItem={
+                      ({item}) => <Text> { ['\nCliente: ' + item.customer + 
+                                            '\nVendedor: ' + item.seller + 
+                                            '\nValor: ' +  item.value] } </Text> }
+                                            
+                    keyExtractor = {(item, index) => index.toString()}
+          />
+        </ScrollView>
       </View>
     );
   }
