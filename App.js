@@ -2,11 +2,37 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  FlatList
 } from 'react-native';
 
-type Props = {};
 export default class App extends Component<Props> {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      orcamentos: [],
+      url: 'https://my-json-server.typicode.com/codificar/oficina/proposals'
+    }
+  }
+
+  componentDidMount(){
+    this.getData();
+  }
+
+  getData = () => {
+
+    fetch(this.state.url)
+    .then(res => res.json())
+    .then( res => {
+
+      this.setState({
+        orcamentos: res
+      })
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
