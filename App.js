@@ -1,11 +1,31 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import ModalDetalhes from './components/ModalDetalhes';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
+
+class Item extends Component { 
+  _onPress = () => { 
+    this.props.onPressItem(this.props.item); 
+  }; 
+  render() { 
+    return(
+      <TouchableOpacity 
+        {...this.props}
+        onPress={this._onPress}
+        >
+        <Text> { ['\nCliente: ' + this.props.item.customer + 
+                  '\nVendedor: ' + this.props.item.seller + 
+                  '\nValor: ' +  this.props.item.value] } </Text>
+      </TouchableOpacity>
+    ) 
+  } 
+}
 
 export default class App extends Component<Props> {
 
@@ -14,7 +34,9 @@ export default class App extends Component<Props> {
 
     this.state = {
       orcamentos: [],
-      url: 'https://my-json-server.typicode.com/codificar/oficina/proposals'
+      url: 'https://my-json-server.typicode.com/codificar/oficina/proposals',
+      isModalVisible: false,
+      selectedItem: null
     }
   }
 
@@ -34,20 +56,35 @@ export default class App extends Component<Props> {
     })
   }
 
+  _onPressItem = (item) => { 
+    this._showModal(item);
+  };
+
+  _hideModal = () => {
+    this.setState({isModalVisible: false})
+  }
+
+  _showModal = (item) => this.setState({ isModalVisible: true, 
+  selectedItem: item })
+
+  _renderItem = ({item}) => (
+    <Item 
+      item={item}
+      onPressItem={() => this._onPressItem(item)}
+    />
+  );
+  
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}>Oficina APP</Text>
         <ScrollView>
           <FlatList data={this.state.orcamentos}
-                    renderItem={
-                      ({item}) => <Text> { ['\nCliente: ' + item.customer + 
-                                            '\nVendedor: ' + item.seller + 
-                                            '\nValor: ' +  item.value] } </Text> }
-                                            
-                    keyExtractor = {(item, index) => index.toString()}
+            renderItem={this._renderItem}                       
+            keyExtractor = {(item, index) => index.toString()}
           />
         </ScrollView>
+        { this.state.isModalVisible && <ModalDetalhes selectedItem={this.state.selectedItem} modalVisible={this.state.isModalVisible} hideModal={this._hideModal} /> }
       </View>
     );
   }
