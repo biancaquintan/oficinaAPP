@@ -6,7 +6,9 @@ O código está organizado no App.js contendo o Component ModalDetalhes.js pra t
 
 Não foram utilizadas bibliotecas externas.
 
+
 USO 
 
 npm install ou yarn install
+
 react-native run-android ou react-native run-android
