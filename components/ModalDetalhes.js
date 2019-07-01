@@ -20,21 +20,23 @@ export default class ModalDetalhes extends Component {
   }
   
   render() {
+
+    const { selectedItem } = this.props;
+
     return (
-      <View>
-        <Modal
+      <Modal
         animationType="slide"
         transparent={false}
         visible={this.state.isModalVisible}
         onRequestClose={() => {alert("Modal has been closed.")}}>
-          <View style={styles.container}>
-            <Text>DETALHES DE ORÇAMENTO</Text>
-            <TouchableHighlight onPress={() => { this.props.hideModal() }}>
-              <Text>Close</Text> 
-            </TouchableHighlight>
-          </View>
-        </Modal>
-      </View>
+        <View style={styles.container}>
+          <Text>DETALHES DE ORÇAMENTO</Text>
+          <Text>{ 'Descrição: ' + selectedItem.description }</Text>
+          <TouchableHighlight onPress={() => { this.props.hideModal() }}>
+            <Text>Close</Text> 
+          </TouchableHighlight>
+        </View>
+      </Modal>
     );
   }
 }
@@ -42,7 +44,7 @@ export default class ModalDetalhes extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: "#ccc",
   },
 });
 
