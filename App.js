@@ -18,8 +18,8 @@ class Item extends Component {
       <TouchableOpacity 
         {...this.props}
         onPress={this._onPress}
-        >
-        <Text> { ['\nCliente: ' + this.props.item.customer + 
+        style={styles.item} >
+        <Text style={styles.texto}> { ['\nCliente: ' + this.props.item.customer + 
                   '\nVendedor: ' + this.props.item.seller + 
                   '\nValor: ' +  this.props.item.value] } </Text>
       </TouchableOpacity>
@@ -73,15 +73,23 @@ export default class App extends Component<Props> {
       onPressItem={() => this._onPressItem(item)}
     />
   );
+
+  renderSeparator = () => {
+    return (
+      <View style={{height: 1, width: "95%", backgroundColor: "#CED0CE", marginVertical: 2}}></View>
+    );
+  };
   
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}>Oficina APP</Text>
-        <ScrollView>
+        <ScrollView style={styles.lista}>
+          <Text style={styles.subtitulo}>Controle de Orçamentos</Text>
           <FlatList data={this.state.orcamentos}
-            renderItem={this._renderItem}                       
+            renderItem={this._renderItem}                    
             keyExtractor = {(item, index) => index.toString()}
+            ItemSeparatorComponent = {this.renderSeparator}
           />
         </ScrollView>
         { this.state.isModalVisible && <ModalDetalhes selectedItem={this.state.selectedItem} modalVisible={this.state.isModalVisible} hideModal={this._hideModal} /> }
@@ -96,11 +104,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   titulo: {
-    fontSize: 18,
+    fontSize: 20,
     marginTop: 15,
     fontWeight: 'bold',
     backgroundColor: 'lightblue',
     padding: 5,
     textAlign: 'center'
+  },
+  lista: {
+    margin: 20,
+  },
+  subtitulo: {
+    fontSize: 18,
+  },
+  texto: {
+    paddingVertical: 3
   }
 });

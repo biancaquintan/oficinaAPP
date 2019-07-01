@@ -25,15 +25,15 @@ export default class ModalDetalhes extends Component {
 
     return (
       <Modal
-        animationType="slide"
-        transparent={false}
+        animationType="fade"
+        transparent={true}
         visible={this.state.isModalVisible}
         onRequestClose={() => {alert("Modal has been closed.")}}>
-        <View style={styles.container}>
-          <Text>DETALHES DE ORÇAMENTO</Text>
-          <Text>{ 'Descrição: ' + selectedItem.description }</Text>
+        <View style={styles.content}>
+          <Text style={styles.titulo}>DESCRIÇÃO</Text>
+          <Text>{ selectedItem.description }</Text>
           <TouchableHighlight onPress={() => { this.props.hideModal() }}>
-            <Text>Close</Text> 
+            <Text style={styles.close}>Fechar</Text> 
           </TouchableHighlight>
         </View>
       </Modal>
@@ -42,10 +42,25 @@ export default class ModalDetalhes extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ccc",
+  content: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: "#FFF",
+    padding: 20,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.27,
+    elevation: 6,
   },
+  close: {
+    color: 'lightblue',
+    paddingTop: 15
+  },
+  titulo: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginVertical: 5
+  }
 });
 
 module.export = ModalDetalhes;
