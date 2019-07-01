@@ -24,33 +24,36 @@ export default class ModalDetalhes extends Component {
     const { selectedItem } = this.props;
 
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={this.state.isModalVisible}
-        onRequestClose={() => {alert("Modal has been closed.")}}>
-        <View style={styles.content}>
-          <Text style={styles.titulo}>DESCRIÇÃO</Text>
-          <Text>{ selectedItem.description }</Text>
-          <TouchableHighlight onPress={() => { this.props.hideModal() }}>
-            <Text style={styles.close}>Fechar</Text> 
-          </TouchableHighlight>
-        </View>
-      </Modal>
+      <View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.isModalVisible}
+          onRequestClose={() => {alert("Modal has been closed.")}}>
+          <View style={styles.content}>
+            <Text style={styles.titulo}>DESCRIÇÃO</Text>
+            <Text>{ selectedItem.description }</Text>
+            <TouchableHighlight onPress={() => { this.props.hideModal() }}>
+              <Text style={styles.close}>Fechar</Text> 
+            </TouchableHighlight>
+          </View>
+        </Modal>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   content: {
+    top: '40%',
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: "#FFF",
-    padding: 20,
+    padding: 35,
     borderRadius: 5,
     shadowColor: "#000",
     shadowOpacity: 0.27,
-    elevation: 6,
+    elevation: 6
   },
   close: {
     color: 'lightblue',

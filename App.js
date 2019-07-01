@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   titulo: {
-    fontSize: 20,
+    fontSize: 22,
     marginTop: 15,
     fontWeight: 'bold',
     backgroundColor: 'lightblue',
@@ -115,9 +115,10 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   subtitulo: {
-    fontSize: 18,
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   texto: {
-    paddingVertical: 3
+    paddingVertical: 3,
   }
 });
